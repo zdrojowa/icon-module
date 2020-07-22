@@ -1,0 +1,7 @@
+name: IconModule
+version: 1.0.0
+
+aclAnchor: IconModule
+aclName: Ikonki
+
+routePrefix: IconModule

@@ -1,0 +1,49 @@
+index:
+  path: /dashboard/icons
+  controller: Selene\Modules\IconModule\Http\Controllers\IconController@index
+  methods:
+    - GET
+  permission: IconModule
+
+ajax:
+  path: /dashboard/icons/ajax
+  controller: Selene\Modules\IconModule\Http\Controllers\IconController@ajax
+  methods:
+    - POST
+  permission: IconModule
+
+create:
+  path: /dashboard/icons/create
+  controller: Selene\Modules\IconModule\Http\Controllers\IconController@create
+  methods:
+    - GET
+  permission: IconModule.add
+
+store:
+  path: /dashboard/icons/store
+  controller: Selene\Modules\IconModule\Http\Controllers\IconController@store
+  methods:
+    - POST
+  permission: IconModule.add
+
+edit:
+  path: /dashboard/icons/{{icon}}/edit
+  controller: Selene\Modules\IconModule\Http\Controllers\IconController@edit
+  methods:
+    - GET
+  permission: IconModule.edit
+
+update:
+  path: /dashboard/icons/{{icon}}
+  controller: Selene\Modules\IconModule\Http\Controllers\IconController@update
+  methods:
+    - PUT
+    - PATCH
+  permission: IconModule.edit
+
+destroy:
+  path: /dashboard/icons/{{icon}}
+  controller: Selene\Modules\IconModule\Http\Controllers\IconController@destroy
+  methods:
+    - DELETE
+  permission: IconModule.delete

@@ -1,0 +1,5 @@
+hotels:
+  name: Ikonki
+  icon: mdi mdi-svg
+  permission: IconModule
+  route: IconModule::index

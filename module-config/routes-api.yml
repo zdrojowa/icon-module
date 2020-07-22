@@ -1,0 +1,5 @@
+api.icons:
+  path: /icons
+  controller: Selene\Modules\IconModule\Http\Controllers\ApiController@get
+  methods:
+    - GET
