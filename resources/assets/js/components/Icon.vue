@@ -59,8 +59,8 @@
 </template>
 
 <script>
-    import Selector from './../../../../../../../vendor/zdrojowa/media-module/resources/assets/js/components/Selector'
-    import FileView from './../../../../../../../vendor/zdrojowa/media-module/resources/assets/js/components/FileView'
+    import Selector from './../../../../../media-module/resources/assets/js/components/Selector'
+    import FileView from './../../../../../media-module/resources/assets/js/components/FileView'
     export default {
         props : ['csrf', 'route', 'icon', 'mediaSearchRoute', 'mediaRoute', 'checkKeyRoute', 'langs'],
         components: {

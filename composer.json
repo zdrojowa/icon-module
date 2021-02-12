@@ -11,7 +11,8 @@
     "homepage": "https://github.com/zdrojowa/icon-module",
     "keywords": ["Laravel", "IconModule", "vue", "icon"],
     "require": {
-        "zdrojowa/languages-module": "^2.0"
+        "zdrojowa/language-module": "^2.0",
+        "zdrojowa/media-module": "^1.0"
     },
     "autoload": {
         "psr-4": {

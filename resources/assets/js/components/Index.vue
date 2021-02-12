@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import FileView from './../../../../../../../vendor/zdrojowa/media-module/resources/assets/js/components/FileView'
+import FileView from './../../../../../media-module/resources/assets/js/components/FileView'
 export default {
   props: ['items', 'mediaRoute', 'mediaSearchRoute', 'editRoute', 'removeRoute', 'csrf'],
 
