@@ -18,6 +18,15 @@ class ApiController extends Controller
             return response()->json($icons->first());
         }
 
+        $search = $request->get('search');
+        if (!empty($search)) {
+            $icons->where(function($query) use ($search) {
+                $query->where('_id', '=', $search)
+                    ->orWhere('name', 'LIKE', '%' . $search . '%')
+                    ->orWhere('translations', 'LIKE', '%' . $search . '%');
+            });
+        }
+
         if ($request->has('per_page')) {
             return response()->json(
                 $icons->paginate(
@@ -30,5 +39,28 @@ class ApiController extends Controller
         }
 
         return response()->json($icons->get());
+    }
+
+    public function checkKey(Request $request): JsonResponse
+    {
+        $key = $request->get('key');
+        if (empty($key)) {
+            return response()->json(['message' => 'Key is required'],JsonResponse::HTTP_BAD_REQUEST);
+        }
+        $exists = Icon::query();
+        if ($request->has('id')) {
+            $exists->where('_id', '!=', $request->get('id'));
+        }
+        return response()->json(!$exists->where('name', '=', $key)->exists());
+    }
+
+    public function remove(Icon $icon): JsonResponse
+    {
+        try {
+            $icon->delete();
+            return response()->json(['message' => 'Ikonka usunięta']);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()],JsonResponse::HTTP_BAD_REQUEST);
+        }
     }
 }

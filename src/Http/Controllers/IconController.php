@@ -2,33 +2,31 @@
 
 namespace Selene\Modules\IconModule\Http\Controllers;
 
-use Exception;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Selene\Modules\DashboardModule\ZdrojowaTable;
 use Selene\Modules\IconModule\Models\Icon;
+use Selene\Modules\LanguageModule\Models\Language;
 
 class IconController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         return view('IconModule::index');
     }
 
-    public function ajax(Request $request): JsonResponse
-    {
-        return ZdrojowaTable::response(Icon::query(), $request);
-    }
-
     public function create()
     {
-        return view('IconModule::edit');
+        return view('IconModule::edit', [
+            'langs' => Language::all()
+        ]);
     }
 
     public function edit(Icon $icon = null)
     {
-        return view('IconModule::edit', ['icon' => $icon]);
+        return view('IconModule::edit', [
+            'icon'  => $icon,
+            'langs' => Language::all()
+        ]);
     }
 
     public function store(Request $request)
@@ -55,21 +53,12 @@ class IconController extends Controller
     }
 
     private function save(Request $request, Icon $icon = null) {
+        $request->merge(['translations' => json_decode($request->get('translations'))]);
         if ($icon === null) {
-            return Icon::create($request->all());
+            return Icon::query()->create($request->all());
         }
 
         $icon->update($request->all());
         return $icon;
-    }
-
-    public function destroy(Icon $icon, Request $request): void
-    {
-        try {
-            $icon->delete();
-            $request->session()->flash('alert-success', 'Ikonka usunięta');
-        } catch (Exception $e) {
-            $request->session()->flash('alert-error', 'Error: ' . $e->getMessage());
-        }
     }
 }

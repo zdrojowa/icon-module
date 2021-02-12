@@ -1,73 +1,37 @@
-@extends('DashboardModule::dashboard.index')
+@extends('DashboardModule::dashboard.index', ['title' => 'Ikonki'])
+
+@section('navbar-actions')
+    <b-nav-form>
+        <b-form-input size="sm" class="mr-sm-2" placeholder="Szukaj" v-model="search"></b-form-input>
+        <b-button size="sm" class="my-2 my-sm-0" type="button" @click="find">Szukaj</b-button>
+    </b-nav-form>
+    <b-nav-form>
+        <b-button size="sm" class="my-2 my-sm-0" type="button" variant="success" to="{{ route('IconModule::create') }}">
+            <b-icon-plus></b-icon-plus> Dodaj
+        </b-button>
+    </b-nav-form>
+@endsection
 
 @section('content')
-    <div class="content-wrapper">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header clearfix">
-                        <h4 class="card-title float-left">Lista wszystkich ikonek</h4>
-                        <a href="{{ route('IconModule::create') }}" class="btn btn-success float-right mr-2">
-                            <i class="mdi mdi-plus-circle"></i> Dodaj
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-striped"></table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <b-container fluid>
+        <index
+                add-route="{{ route('IconModule::create') }}"
+                media-route="/media/"
+                media-search-route="{{ route('MediaModule::api.files') }}"
+                edit-route="{{ route('IconModule::edit', ['icon' => 'id']) }}"
+                remove-route="{{ route('IconModule::api.remove', ['icon' => 'id']) }}"
+                :items="items"
+                csrf="{{ csrf_token() }}"
+        >
+        </index>
+    </b-container>
+@endsection
+
+@section('stylesheets')
+    @parent
+    <link rel="stylesheet" href="{{ mix('vendor/css/MediaModule.css') }}">
 @endsection
 
 @section('javascripts')
-    @parent
-
-    <script>
-        $('.table').zdrojowaTable({
-            ajax: {
-                url: "{{route('IconModule::ajax')}}",
-                method: "POST",
-                data: {
-                    "_token": "{{csrf_token()}}"
-                },
-            },
-            headers: [
-                {
-                    name: 'Nazwa',
-                    type: 'text',
-                    ajax: 'name',
-                    orderable: true,
-                },
-                {
-                    name: 'Data utworzenia',
-                    orderable: true,
-                    ajax: 'created_at'
-                },
-                {
-                    name: 'Akcje',
-                    ajax: 'key',
-                    type: 'actions',
-                    buttons: [
-                    @permission('IconModule.edit')
-                        {
-                            color: 'primary',
-                            icon: 'mdi mdi-pencil',
-                            class: 'remove',
-                            url: "{{route('IconModule::edit', ['icon' => '%%id%%'])}}"
-                        },
-                    @endpermission
-                    @permission('IconModule.delete')
-                        {
-                            color: 'danger',
-                            icon: 'mdi mdi-delete',
-                            class: 'ZdrojowaTable--remove-action',
-                            url: "{{route('IconModule::destroy', ['icon' => '%%id%%'])}}"
-                        },
-                    @endpermission
-                    ]
-                }
-            ]
-        });
-    </script>
+    <script src="{{ mix("vendor/js/IconModule.js") }}"></script>
 @endsection

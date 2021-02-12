@@ -5,13 +5,6 @@ index:
     - GET
   permission: IconModule
 
-ajax:
-  path: /dashboard/icons/ajax
-  controller: Selene\Modules\IconModule\Http\Controllers\IconController@ajax
-  methods:
-    - POST
-  permission: IconModule
-
 create:
   path: /dashboard/icons/create
   controller: Selene\Modules\IconModule\Http\Controllers\IconController@create
@@ -40,10 +33,3 @@ update:
     - PUT
     - PATCH
   permission: IconModule.edit
-
-destroy:
-  path: /dashboard/icons/{{icon}}
-  controller: Selene\Modules\IconModule\Http\Controllers\IconController@destroy
-  methods:
-    - DELETE
-  permission: IconModule.delete

@@ -1,15 +1,40 @@
 import Vue from 'vue';
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+import {BootstrapVue, BootstrapVueIcons, IconsPlugin} from 'bootstrap-vue';
+import VueRouter from 'vue-router'
+import Index from './components/Index'
+import Icon from './components/Icon'
 
 window.axios = require('axios');
 
-Vue.use(BootstrapVue);
-Vue.use(IconsPlugin);
+Vue.use(BootstrapVue)
+Vue.use(BootstrapVueIcons)
+Vue.use(VueRouter)
 
-Vue.component('media-selector', require('./components/media-selector.vue').default);
-Vue.component('icon', require('./components/icon.vue').default);
+const app = document.getElementById('app');
 
-const app = new Vue({
-    el: '#app'
-});
+new Vue({
+    components: {Index, Icon},
 
+    data() {
+        return {
+            search: '',
+            items: []
+        }
+    },
+
+    mounted() {
+        this.find()
+    },
+
+    methods: {
+        find() {
+            let self = this
+            axios.get('/api/icons?search=' + self.search)
+            .then(function(response) {
+                self.items = response.data
+            }).catch(function(error) {
+                console.log(error)
+            })
+        }
+    }
+}).$mount(app);

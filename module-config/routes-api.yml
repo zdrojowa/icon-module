@@ -3,3 +3,16 @@ api.icons:
   controller: Selene\Modules\IconModule\Http\Controllers\ApiController@get
   methods:
     - GET
+
+api.checkKey:
+  path: /icons/check-key
+  controller: Selene\Modules\IconModule\Http\Controllers\ApiController@checkKey
+  methods:
+    - GET
+
+api.remove:
+  path: /icons/remove/{{icon}}
+  controller: Selene\Modules\IconModule\Http\Controllers\ApiController@remove
+  methods:
+    - DELETE
+  permission: IconModule.delete

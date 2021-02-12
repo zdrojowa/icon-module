@@ -19,6 +19,7 @@ class Icon extends Model
      */
     protected $fillable = [
         'name',
-        'url',
+        'file',
+        'translations'
     ];
 }

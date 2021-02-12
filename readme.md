@@ -17,8 +17,10 @@ $ composer require zdrojowa/icon-module
 
 ``` bash
 "axios": "^0.19",
-"bootstrap-vue": "2.11.0",
+"bootstrap": "^4.5.3",
+"bootstrap-vue": "2.16.0",
 "vue": "^2.6.10",
+"vue-router": "^3.4.9",
 ```
 
 ## Usage
@@ -77,7 +79,6 @@ license. Please see the [license file](license.md) for more information.
 
 [ico-version]: https://img.shields.io/packagist/v/zdrojowa/icon-module.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/zdrojowa/icon-module.svg?style=flat-square
-
 [link-packagist]: https://packagist.org/packages/zdrojowa/icon-module
 [link-downloads]: https://packagist.org/packages/zdrojowa/icon-module
 [link-author]: https://github.com/zdrojowa
