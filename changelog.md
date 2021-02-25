@@ -11,3 +11,6 @@
 
 ## Version 2.0.1
 - Fix composer
+
+## Version 2.0.2
+- Add selector & view
